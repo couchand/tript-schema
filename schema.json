@@ -4,7 +4,7 @@
   "title": "Tript Language Schema",
   "type": "object",
   "properties": {
-    "type": {
+    "_type": {
       "type": "string",
       "enum": ["Function"]
     },
@@ -46,7 +46,7 @@
     "literal-boolean": {
       "type": "object",
       "properties": {
-        "type": {
+        "_type": {
           "type": "string",
           "enum": ["LiteralBoolean"]
         },
@@ -55,7 +55,7 @@
         }
       },
       "additionalProperties": false,
-      "required": ["type", "value"]
+      "required": ["_type", "value"]
     },
     "literal": {
       "oneOf": [
@@ -67,7 +67,7 @@
     "reference": {
       "type": "object",
       "properties": {
-        "type": {
+        "_type": {
           "type": "string",
           "enum": ["Reference"]
         },
@@ -76,12 +76,12 @@
         }
       },
       "additionalProperties": false,
-      "required": ["type", "name"]
+      "required": ["_type", "name"]
     },
     "and": {
       "type": "object",
       "properties": {
-        "type": {
+        "_type": {
           "type": "string",
           "enum": ["And"]
         },
@@ -93,12 +93,12 @@
         }
       },
       "additionalProperties": false,
-      "required": ["type", "children"]
+      "required": ["_type", "children"]
     },
     "or": {
       "type": "object",
       "properties": {
-        "type": {
+        "_type": {
           "type": "string",
           "enum": ["Or"]
         },
@@ -110,7 +110,7 @@
         }
       },
       "additionalProperties": false,
-      "required": ["type", "children"]
+      "required": ["_type", "children"]
     },
     "expression": {
       "oneOf": [
@@ -130,5 +130,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["type", "name", "parameters", "body"]
+  "required": ["_type", "name", "parameters", "body"]
 }

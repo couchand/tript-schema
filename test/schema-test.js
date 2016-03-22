@@ -33,13 +33,13 @@ describe('tript schema', function() {
 
     it('expects a value', function() {
       validate('literal-boolean', {
-        type: 'LiteralBoolean'
+        _type: 'LiteralBoolean'
       }).should.be.false
     })
 
     it('disallows additional properties', function() {
       validate('literal-boolean', {
-        type: 'LiteralBoolean',
+        _type: 'LiteralBoolean',
         value: true,
         foobar: 'baz'
       }).should.be.false
@@ -47,12 +47,12 @@ describe('tript schema', function() {
 
     it('validates booleans', function() {
       validate('literal-boolean', {
-        type: 'LiteralBoolean',
+        _type: 'LiteralBoolean',
         value: true
       }).should.be.true
 
       validate('literal-boolean', {
-        type: 'LiteralBoolean',
+        _type: 'LiteralBoolean',
         value: false
       }).should.be.true
     })
@@ -65,13 +65,13 @@ describe('tript schema', function() {
 
     it('expects children', function() {
       validate('and', {
-        type: 'And'
+        _type: 'And'
       }).should.be.false
     })
 
     it('disallows additional properties', function() {
       validate('and', {
-        type: 'And',
+        _type: 'And',
         children: [],
         foobar: 'baz'
       }).should.be.false
@@ -79,14 +79,14 @@ describe('tript schema', function() {
 
     it('validates empty children', function() {
       validate('and', {
-        type: 'And',
+        _type: 'And',
         children: []
       }).should.be.true
     })
 
     it('expects a child expression', function() {
       validate('and', {
-        type: 'And',
+        _type: 'And',
         children: [
           {
             foo: 'bar'
@@ -97,10 +97,10 @@ describe('tript schema', function() {
 
     it('validates non-empty children', function() {
       validate('and', {
-        type: 'And',
+        _type: 'And',
         children: [
           {
-            type: 'LiteralBoolean',
+            _type: 'LiteralBoolean',
             value: false
           }
         ]
@@ -115,13 +115,13 @@ describe('tript schema', function() {
 
     it('expects children', function() {
       validate('or', {
-        type: 'Or'
+        _type: 'Or'
       }).should.be.false
     })
 
     it('disallows additional properties', function() {
       validate('or', {
-        type: 'Or',
+        _type: 'Or',
         children: [],
         foobar: 'baz'
       }).should.be.false
@@ -129,14 +129,14 @@ describe('tript schema', function() {
 
     it('validates empty children', function() {
       validate('or', {
-        type: 'Or',
+        _type: 'Or',
         children: []
       }).should.be.true
     })
 
     it('expects a child expression', function() {
       validate('or', {
-        type: 'Or',
+        _type: 'Or',
         children: [
           {
             foo: 'bar'
@@ -147,10 +147,10 @@ describe('tript schema', function() {
 
     it('validates non-empty children', function() {
       validate('or', {
-        type: 'Or',
+        _type: 'Or',
         children: [
           {
-            type: 'LiteralBoolean',
+            _type: 'LiteralBoolean',
             value: false
           }
         ]
@@ -200,7 +200,7 @@ describe('tript schema', function() {
         name: 'Foobar',
         parameters: [],
         body: {
-          type: 'LiteralBoolean',
+          _type: 'LiteralBoolean',
           value: true
         }
       }).should.be.false
@@ -208,10 +208,10 @@ describe('tript schema', function() {
 
     it('expects a name', function() {
       validate({
-        type: 'Function',
+        _type: 'Function',
         parameters: [],
         body: {
-          type: 'LiteralBoolean',
+          _type: 'LiteralBoolean',
           value: true
         }
       }).should.be.false
@@ -219,7 +219,7 @@ describe('tript schema', function() {
 
     it('expects a body', function() {
       validate({
-        type: 'Function',
+        _type: 'Function',
         name: 'Foobar',
         parameters: []
       }).should.be.false
@@ -227,10 +227,10 @@ describe('tript schema', function() {
 
     it('expects parameters', function() {
       validate({
-        type: 'Function',
+        _type: 'Function',
         name: 'Test',
         body: {
-          type: 'LiteralBoolean',
+          _type: 'LiteralBoolean',
           value: true
         }
       }).should.be.false
@@ -267,10 +267,10 @@ describe('tript schema', function() {
 
     it('disallows other properties', function() {
       validate({
-        type: 'Function',
+        _type: 'Function',
         name: 'Test',
         body: {
-          type: 'LiteralBoolean',
+          _type: 'LiteralBoolean',
           value: true
         },
         parameters: [],
@@ -288,13 +288,13 @@ describe('tript schema', function() {
 
     it('expects a name', function() {
       validate('reference', {
-        type: 'Reference'
+        _type: 'Reference'
       }).should.be.false
     })
 
     it('disallows additional properties', function() {
       validate('reference', {
-        type: 'Reference',
+        _type: 'Reference',
         name: 'foobar',
         foobar: 'baz'
       }).should.be.false
@@ -302,7 +302,7 @@ describe('tript schema', function() {
 
     it('validates', function() {
       validate('reference', {
-        type: 'Reference',
+        _type: 'Reference',
         name: 'foobar'
       }).should.be.true
     })
@@ -310,7 +310,7 @@ describe('tript schema', function() {
 
   it('validates a valid schema', function() {
     validate({
-      type: 'Function',
+      _type: 'Function',
       name: 'Test',
       parameters: [
         {
@@ -319,17 +319,17 @@ describe('tript schema', function() {
         }
       ],
       body: {
-        type: 'And',
+        _type: 'And',
         children: [
           {
-            type: 'Or',
+            _type: 'Or',
             children: [
               {
-                type: 'LiteralBoolean',
+                _type: 'LiteralBoolean',
                 value: true
               },
               {
-                type: 'Reference',
+                _type: 'Reference',
                 name: 'foobar'
               }
             ]
