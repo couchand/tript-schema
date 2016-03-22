@@ -1,0 +1,20 @@
+{
+  "name": "tript-schema",
+  "version": "0.0.1",
+  "description": "A JSON Schema for the Tript scripting language.",
+  "main": "schema.json",
+  "author": "Andrew Couch <tript@andrewcou.ch>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "github.com/couchand/tript-schema.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "z-schema": "^3.16.1"
+  }
+}

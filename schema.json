@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://andrewcou.ch/tript/schema.json#",
+  "title": "Tript Language Schema",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["Function"]
+    },
+    "name": {
+      "$ref": "#/definitions/identifier"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/parameter"
+      }
+    },
+    "body": {
+      "$ref": "#/definitions/expression"
+    }
+  },
+  "definitions": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["Boolean"]
+    },
+    "parameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/type"
+        },
+        "name": {
+          "$ref": "#/definitions/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "literal-boolean": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["LiteralBoolean"]
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "value"]
+    },
+    "literal": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/literal-boolean"
+        }
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Reference"]
+        },
+        "name": {
+          "$ref": "#/definitions/identifier"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "name"]
+    },
+    "and": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["And"]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "children"]
+    },
+    "or": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Or"]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "children"]
+    },
+    "expression": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/literal"
+        },
+        {
+          "$ref": "#/definitions/reference"
+        },
+        {
+          "$ref": "#/definitions/and"
+        },
+        {
+          "$ref": "#/definitions/or"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": ["type", "name", "parameters", "body"]
+}
