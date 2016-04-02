@@ -56,6 +56,55 @@ describe('tript schema', function() {
         value: false
       }).should.be.true
     })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'LiteralBoolean',
+       value: true
+      }).should.be.true
+    })
+  })
+
+  describe('LiteralNumber', function() {
+    it('expects a type', function() {
+      validate('literal-number', {}).should.be.false
+    })
+
+    it('expects a value', function() {
+      validate('literal-number', {
+        _type: 'LiteralNumber'
+      }).should.be.false
+    })
+
+    it('disallows additional properties', function() {
+      validate('literal-number', {
+        _type: 'LiteralNumber',
+        value: true,
+        foobar: 'baz'
+      }).should.be.false
+    })
+
+    it('validates numbers', function() {
+      var numbers = [
+        0, 1, -1,
+        42, -42, 10001, -10001,
+        3.14159265, -3.14159265
+      ]
+
+      numbers.forEach(function(num) {
+        validate('literal-number', {
+          _type: 'LiteralNumber',
+          value: num
+        }).should.be.true
+      })
+    })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'LiteralNumber',
+       value: 42
+      }).should.be.true
+    })
   })
 
   describe('And', function() {
@@ -152,6 +201,114 @@ describe('tript schema', function() {
           {
             _type: 'LiteralBoolean',
             value: false
+          }
+        ]
+      }).should.be.true
+    })
+  })
+
+  describe('Sum', function() {
+    it('expects a type', function() {
+      validate('sum', {}).should.be.false
+    })
+
+    it('expects children', function() {
+      validate('sum', {
+        _type: 'Sum'
+      }).should.be.false
+    })
+
+    it('disallows additional properties', function() {
+      validate('sum', {
+        _type: 'Sum',
+        children: [],
+        foobar: 'baz'
+      }).should.be.false
+    })
+
+    it('validates empty children', function() {
+      validate('sum', {
+        _type: 'Sum',
+        children: []
+      }).should.be.true
+    })
+
+    it('expects a child expression', function() {
+      validate('sum', {
+        _type: 'Sum',
+        children: [
+          {
+            foo: 'bar'
+          }
+        ]
+      }).should.be.false
+    })
+
+    it('validates non-empty children', function() {
+      validate('sum', {
+        _type: 'Sum',
+        children: [
+          {
+            _type: 'LiteralNumber',
+            value: 42
+          },
+          {
+            _type: 'LiteralNumber',
+            value: 0
+          }
+        ]
+      }).should.be.true
+    })
+  })
+
+  describe('Equal', function() {
+    it('expects a type', function() {
+      validate('equal', {}).should.be.false
+    })
+
+    it('expects children', function() {
+      validate('equal', {
+        _type: 'Equal'
+      }).should.be.false
+    })
+
+    it('disallows additional properties', function() {
+      validate('equal', {
+        _type: 'Equal',
+        children: [],
+        foobar: 'baz'
+      }).should.be.false
+    })
+
+    it('validates empty children', function() {
+      validate('equal', {
+        _type: 'Equal',
+        children: []
+      }).should.be.true
+    })
+
+    it('expects a child expression', function() {
+      validate('equal', {
+        _type: 'Equal',
+        children: [
+          {
+            foo: 'bar'
+          }
+        ]
+      }).should.be.false
+    })
+
+    it('validates non-empty children', function() {
+      validate('equal', {
+        _type: 'Equal',
+        children: [
+          {
+            _type: 'LiteralNumber',
+            value: 42
+          },
+          {
+            _type: 'LiteralNumber',
+            value: 0
           }
         ]
       }).should.be.true

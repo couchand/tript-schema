@@ -57,10 +57,27 @@
       "additionalProperties": false,
       "required": ["_type", "value"]
     },
+    "literal-number": {
+      "type": "object",
+      "properties": {
+        "_type": {
+          "type": "string",
+          "enum": ["LiteralNumber"]
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["_type", "value"]
+    },
     "literal": {
       "oneOf": [
         {
           "$ref": "#/definitions/literal-boolean"
+        },
+        {
+          "$ref": "#/definitions/literal-number"
         }
       ]
     },
@@ -101,6 +118,40 @@
         "_type": {
           "type": "string",
           "enum": ["Or"]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["_type", "children"]
+    },
+    "sum": {
+      "type": "object",
+      "properties": {
+        "_type": {
+          "type": "string",
+          "enum": ["Sum"]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/expression"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": ["_type", "children"]
+    },
+    "equal": {
+      "type": "object",
+      "properties": {
+        "_type": {
+          "type": "string",
+          "enum": ["Equal"]
         },
         "children": {
           "type": "array",
