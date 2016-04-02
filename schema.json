@@ -176,6 +176,12 @@
         },
         {
           "$ref": "#/definitions/or"
+        },
+        {
+          "$ref": "#/definitions/sum"
+        },
+        {
+          "$ref": "#/definitions/equal"
         }
       ]
     }

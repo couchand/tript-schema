@@ -60,7 +60,7 @@ describe('tript schema', function() {
     it('is an expression', function() {
       validate('expression', {
         _type: 'LiteralBoolean',
-       value: true
+        value: true
       }).should.be.true
     })
   })
@@ -102,7 +102,7 @@ describe('tript schema', function() {
     it('is an expression', function() {
       validate('expression', {
         _type: 'LiteralNumber',
-       value: 42
+        value: 42
       }).should.be.true
     })
   })
@@ -155,6 +155,13 @@ describe('tript schema', function() {
         ]
       }).should.be.true
     })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'And',
+        children: []
+      }).should.be.true
+    })
   })
 
   describe('Or', function() {
@@ -203,6 +210,13 @@ describe('tript schema', function() {
             value: false
           }
         ]
+      }).should.be.true
+    })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'Or',
+        children: []
       }).should.be.true
     })
   })
@@ -259,6 +273,13 @@ describe('tript schema', function() {
         ]
       }).should.be.true
     })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'Sum',
+        children: []
+      }).should.be.true
+    })
   })
 
   describe('Equal', function() {
@@ -311,6 +332,13 @@ describe('tript schema', function() {
             value: 0
           }
         ]
+      }).should.be.true
+    })
+
+    it('is an expression', function() {
+      validate('expression', {
+        _type: 'Equal',
+        children: []
       }).should.be.true
     })
   })
@@ -459,6 +487,13 @@ describe('tript schema', function() {
 
     it('validates', function() {
       validate('reference', {
+        _type: 'Reference',
+        name: 'foobar'
+      }).should.be.true
+    })
+
+    it('is an expression', function() {
+      validate('expression', {
         _type: 'Reference',
         name: 'foobar'
       }).should.be.true
