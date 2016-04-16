@@ -376,6 +376,7 @@ describe('tript schema', function() {
 
     it('validates types', function() {
       validate('type', 'Boolean').should.be.true
+      validate('type', 'Number').should.be.true
     }) 
   })
 

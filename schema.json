@@ -28,7 +28,7 @@
     },
     "type": {
       "type": "string",
-      "enum": ["Boolean"]
+      "enum": ["Boolean", "Number"]
     },
     "parameter": {
       "type": "object",
